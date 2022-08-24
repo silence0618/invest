@@ -3,7 +3,7 @@
 preHigh = 174.55
 hisHigh = 182.01
 cPrice = float(input('Please input current price: '))
-amount = 200
+amount = 180
 
 
 def reblancing(preHigh, cPrice):
