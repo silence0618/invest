@@ -1,23 +1,18 @@
 import efinance as ef
 
-stock_codes = 'TSLA'
+stock_codes = 'AAPL'
 #print(ef.stock.get_realtime_quotes(['美股']))
-# dealdf = ef.stock.get_deal_detail('AAPL',2000)
-# print(df.iat[1,1],df.iat[1,3])
+baseinfodf = ef.stock.get_base_info(stock_codes)
+print(baseinfodf)
+dealdf = ef.stock.get_deal_detail(stock_codes,1)  # 列举最近1个交易
+cPrice = float(dealdf.iat[-1,4])
+print(dealdf.iat[-1,1],dealdf.iat[-1,4],dealdf.iat[-1,5])  # 提取最后一行，第一列ticker与第四列最新成交价
 # print(dealdf)
 
-# baseinfodf = ef.stock.get_base_info(stock_codes)
-# print(baseinfodf)
-billdf = ef.stock.get_today_bill(stock_codes)
-print(billdf)
-snapdf = ef.stock.get_quote_snapshot(stock_codes)
-print(snapdf)
-
-
-'''
 preHigh = 174.55
 hisHigh = 182.01
-cPrice = float(input('Please input current price: '))
+# cPrice = float(input('Please input current price: '))
+print('Current price is {0:.2f}'.format(cPrice))
 
 amount = 300
     
@@ -85,4 +80,4 @@ while True:
     else:
         print('Please input y or n.')
 
-'''
+
