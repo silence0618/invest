@@ -1,4 +1,9 @@
 import efinance as ef
+import configparser
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+
 
 stock_codes = 'AAPL'
 #print(ef.stock.get_realtime_quotes(['美股']))
@@ -7,10 +12,10 @@ print(baseinfodf)
 dealdf = ef.stock.get_deal_detail(stock_codes,1)  # 列举最近1个交易
 cPrice = float(dealdf.iat[-1,4])
 print(dealdf.iat[-1,1],dealdf.iat[-1,4],dealdf.iat[-1,5])  # 提取最后一行，第一列ticker与第四列最新成交价
-# print(dealdf)
+print(dealdf)
 
-preHigh = 174.55
-hisHigh = 182.01
+preHigh = float(config['PRICE']['preHigh'])
+hisHigh = float(config['PRICE']['hisHigh'])
 # cPrice = float(input('Please input current price: '))
 print('Current price is {0:.2f}'.format(cPrice))
 
