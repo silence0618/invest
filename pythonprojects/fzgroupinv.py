@@ -3,6 +3,7 @@ import configparser
 
 config = configparser.ConfigParser()
 config.read("config.ini")
+crash_check = config['CRASH']['crash']
 
 
 stock_codes = 'AAPL'
@@ -19,7 +20,7 @@ hisHigh = float(config['PRICE']['hisHigh'])
 # cPrice = float(input('Please input current price: '))
 print('Current price is {0:.2f}'.format(cPrice))
 
-amount = 300
+amount = int(config['AMOUNT']['stock_amount'])
     
 def horse_tick(hisHigh, cPrice):
     if cPrice >= hisHigh * (1-0.05):
@@ -74,7 +75,8 @@ def reblancing(preHigh, cPrice):
 
 while True:
 
-    crash = input('Is the NASDAQ dropped more than 3%?:(y or n)')
+    # crash = input('Is the NASDAQ dropped more than 3%?:(y or n)')
+    crash = crash_check
 
     if crash == 'y':
         horse_tick(hisHigh, cPrice)
