@@ -1,31 +1,38 @@
-import efinance as ef
-import configparser
 
+import configparser
+import yfinance as yf
+
+# read the config.ini file 
 config = configparser.ConfigParser()
 config.read("config.ini")
 crash_check = config['CRASH']['crash']
 
 
-stock_codes = 'AAPL'
-#print(ef.stock.get_realtime_quotes(['美股']))
-baseinfodf = ef.stock.get_base_info(stock_codes)
-print(baseinfodf)
-dealdf = ef.stock.get_deal_detail(stock_codes,1)  # 列举最近1个交易
-cPrice = float(dealdf.iat[-1,4])
-print(dealdf.iat[-1,1],dealdf.iat[-1,4],dealdf.iat[-1,5])  # 提取最后一行，第一列ticker与第四列最新成交价
-print(dealdf)
 
+stock_codes = 'AAPL'
+
+
+# Fetch current price from Yahoo finance
+def get_cPrice(ticker):
+    global cPrice
+    price = yf.Ticker(ticker)
+    cPrice = price.info['regularMarketPrice']
+    return cPrice
+
+get_cPrice(stock_codes)
+
+
+# Read the stock amount, preHigh and historical Hight price from the config.ini file
 preHigh = float(config['PRICE']['preHigh'])
 hisHigh = float(config['PRICE']['hisHigh'])
-# cPrice = float(input('Please input current price: '))
+amount = int(config['AMOUNT']['stock_amount'])
+
 print('Current price is {0:.2f}'.format(cPrice))
 
-amount = int(config['AMOUNT']['stock_amount'])
+
     
 def horse_tick(hisHigh, cPrice):
-    if cPrice >= hisHigh * (1-0.05):
-        print('Sell 90% of the shares. To keep {0} shares. Set auto trade with price {1:.2f}'.format(amount * 0.1,\
-            hisHigh * (1-0.05)))
+
     if hisHigh * (1-0.05) >= cPrice > hisHigh * (1-0.1):
         print('Keep 10% of the shares. To keep {0} shares'.format(amount * 0.1))
     if hisHigh * (1-0.1) >= cPrice > hisHigh * (1-0.15):
