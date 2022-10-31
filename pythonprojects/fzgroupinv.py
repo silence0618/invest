@@ -7,8 +7,6 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 crash_check = config['CRASH']['crash']
 
-
-
 stock_codes = 'AAPL'
 
 
@@ -79,6 +77,8 @@ def reblancing(preHigh, cPrice):
         print('keep 10% of the shares = {0} shares'.format(amount * 0.1))
     if preHigh * (1-0.25) >= cPrice:
         print('It is bare market, sell all!!!')
+    else:
+        print('Keep current position!!!')
 
 while True:
 

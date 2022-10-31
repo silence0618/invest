@@ -44,7 +44,7 @@ config['AMOUNT'] = {
 
 
 config['PRICE'] = {
-    'preHigh' : 174.55,
+    'preHigh' : 155.74,
     'hisHigh' : 182.01
 }
 
