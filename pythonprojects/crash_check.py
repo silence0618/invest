@@ -1,4 +1,4 @@
-import efinance as ef
+
 from datetime import datetime, timedelta
 import configparser
 import yfinance as yf
@@ -24,7 +24,7 @@ nasdaq_rate = statuscheck('^IXIC')
 if nasdaq_rate <= -0.03:
     crash_check = 'y'
     crash_date = str(datetime.today())
-    reset_date = crash_date + timedelta(days=31)
+    #reset_date = crash_date + timedelta(days=31)
 else:
     crash_check = 'n'
     date_time = '2022-10-14'
@@ -38,13 +38,13 @@ print(nasdaq_rate)
 config = configparser.ConfigParser()
 
 config['AMOUNT'] = {
-    'stock_amount' : 250,
+    'stock_amount' : 230,
     'budget' : 20000
 }
 
 
 config['PRICE'] = {
-    'preHigh' : 155.74,
+    'preHigh' : 146.63,
     'hisHigh' : 182.01
 }
 
